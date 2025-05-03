@@ -1,0 +1,111 @@
+# Gradle Wrapper
+.gradle/
+**/build/
+local.properties
+**/local.properties
+**/out/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio
+.idea/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/shelf/
+.idea/misc.xml
+.idea/modules.xml
+.DS_Store
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Keystore Files
+*.jks
+*.keystore
+
+# Jetpack Compose Debugger Files
+.compose-cache/
+
+# Kotlin/Java Bytecode
+*.class
+
+# Gradle
+.gradle/
+build/
+captures/
+outputs/
+
+# Local Configuration
+*.local
+.env
+
+# Log Files
+*.log
+logs/
+
+# OS-Specific Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Coverage
+*.ec
+
+# Dependency Caches
+**/node_modules/
+**/yarn.lock
+**/package-lock.json
+
+# Generated Files
+build/
+**/build/
+.gradle/
+.cxx/
+.externalNativeBuild/
+
+
+# Android NDK
+obj/
+
+# macOS specific
+*.DS_Store
+
+# Windows specific
+Thumbs.db
+desktop.ini
+
+# Ignore Android test results
+**/test-results/
+**/test-output/
+
+# Ignore IntelliJ project files
+*.iml
+.idea/
+
+# Ignore generated .apk and .aab files
+*.apk
+*.aab
+
+# Ignore kapt generated files
+build/tmp/kapt/
+
+# Ignore Kotlin specific caches
+**/.kotlin/
+
+# Ignore JetBrains IDE specific caches
+.idea/.idea_modules
+.idea/modules.xml
+.idea/.name
+.idea/.idea_format.xml
+.idea/.workspace
+
+# Ignore virtual machine files
+*.hprof
+*.vmoptions

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1078250267033",
+    "project_id": "sports-betting-93174",
+    "storage_bucket": "sports-betting-93174.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078250267033:android:679ca30d5b59854f577308",
+        "android_client_info": {
+          "package_name": "com.sports.betting"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAIEDOIoijHwQaTG5NbOuOpz3u4OfhBBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078250267033:android:4b0e4cdf91b685df577308",
+        "android_client_info": {
+          "package_name": "com.sports.betting.debug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAIEDOIoijHwQaTG5NbOuOpz3u4OfhBBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
