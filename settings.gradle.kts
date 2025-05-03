@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "SPORTS BETTING"
 include(":app")
+include(":core:common")
