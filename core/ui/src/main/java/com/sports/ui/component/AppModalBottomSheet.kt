@@ -1,15 +1,11 @@
 package com.sports.ui.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -17,7 +13,6 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.ModalBottomSheetDefaults
 import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sports.designsystem.theme.AppTheme
 
@@ -36,14 +30,6 @@ fun AppModalBottomSheet(
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
     title: String? = null,
-    dragHandle: @Composable (() -> Unit)? = {
-        LoodosDragHandle(
-            color = MaterialTheme.colorScheme.outline,
-            width = 80.dp,
-            height = 4.dp,
-            dragHandlePadding = 16.dp,
-        )
-    },
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     properties: ModalBottomSheetProperties = ModalBottomSheetDefaults.properties,
     containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
@@ -67,27 +53,9 @@ fun AppModalBottomSheet(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            dragHandle?.invoke()
             title?.let { AppCenterTopAppBar(title = it) }
             content()
         }
-    }
-}
-
-@Composable
-fun LoodosDragHandle(
-    modifier: Modifier = Modifier,
-    width: Dp = 32.dp,
-    height: Dp = 4.dp,
-    dragHandlePadding: Dp = 12.dp,
-    color: Color = MaterialTheme.colorScheme.onSurfaceVariant,
-) {
-    Surface(
-        modifier = modifier.padding(vertical = dragHandlePadding),
-        color = color,
-        shape = MaterialTheme.shapes.extraLarge,
-    ) {
-        Box(Modifier.size(width = width, height = height))
     }
 }
 

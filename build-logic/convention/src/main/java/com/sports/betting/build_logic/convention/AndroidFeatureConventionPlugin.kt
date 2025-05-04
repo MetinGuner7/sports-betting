@@ -23,12 +23,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
-/*                add("implementation", project(":core:ui"))
+                add("implementation", project(":core:ui"))
                 add("implementation", project(":core:designsystem"))
-                add("implementation", project(":core:resources"))
-                add("implementation", project(":core:network"))
+                //add("implementation", project(":core:network"))
                 add("implementation", project(":core:monitor"))
-                add("implementation", project(":core:analytics"))*/
+                add("implementation", project(":core:analytics"))
 
                 add("implementation", libs.findLibrary("coil.kt").get())
                 add("implementation", libs.findLibrary("coil.kt.compose").get())
