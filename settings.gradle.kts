@@ -24,3 +24,4 @@ rootProject.name = "sports-betting"
 include(":app")
 include(":core:common")
 include(":core:analytics")
+include(":core:designsystem")
