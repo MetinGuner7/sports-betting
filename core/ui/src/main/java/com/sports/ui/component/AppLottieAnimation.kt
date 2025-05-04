@@ -68,7 +68,7 @@ enum class AppLottieResourceType {
 
 @Preview(showBackground = true)
 @Composable
-private fun LoodosLottieAnimationPreview() {
+private fun AppLottieAnimationPreview() {
     AppLottieAnimation(
         lottieUrl = "loading.json",
         lottieResourceType = AppLottieResourceType.RAW,

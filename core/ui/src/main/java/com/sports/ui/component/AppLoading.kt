@@ -20,7 +20,7 @@ private const val LOTTIE_RAW_URL = "loading"
 private const val EXIT_ANIMATION_DURATION = 50
 
 @Composable
-fun LoodosLoading(
+fun AppLoading(
     isDisplayed: Boolean,
     modifier: Modifier = Modifier,
     dismissOnBackPress: Boolean = true,
@@ -52,5 +52,5 @@ fun LoodosLoading(
 @Preview
 @Composable
 private fun BodyPreview() {
-    AppTheme  { LoodosLoading(isDisplayed = true) }
+    AppTheme  { AppLoading(isDisplayed = true) }
 }
