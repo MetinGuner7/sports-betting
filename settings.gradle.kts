@@ -19,7 +19,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-rootProject.name = "SPORTS BETTING"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+rootProject.name = "sports-betting"
 include(":app")
 include(":core:common")
+include(":core:analytics")
