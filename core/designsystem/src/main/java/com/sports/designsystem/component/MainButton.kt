@@ -33,14 +33,13 @@ import com.sports.designsystem.icons.AppIcons
 import com.sports.designsystem.icons.User
 import com.sports.designsystem.theme.AppTheme
 import com.sports.designsystem.theme.LargeSpacer
-import com.sports.designsystem.theme.MediumSpacer
 import com.sports.designsystem.theme.radius
 import com.sports.designsystem.theme.semibold
 import kotlinx.coroutines.delay
 
 
 @Composable
-fun LoodosButton(
+fun MainButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     text: String? = null,
@@ -98,11 +97,11 @@ private fun BodyPreview() {
 
     AppTheme {
         Box(Modifier.background(Color.White).padding(32.dp)) {
-            LoodosButton(
+            MainButton(
                 enabled = true,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
-                text = "Loodos Button",
+                text = "Main Button",
             )
         }
     }
@@ -111,15 +110,14 @@ private fun BodyPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun BodyIconPreview() {
-
     AppTheme {
         Box(Modifier.background(Color.White).padding(32.dp)) {
-            LoodosButton(
+            MainButton(
                 enabled = true,
                 icon = AppIcons.User,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
-                text = "Loodos Button",
+                text = "Main Button",
             )
         }
     }
