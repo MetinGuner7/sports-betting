@@ -1,4 +1,4 @@
-package com.sports.betting
+package com.sports.login
 
 import org.junit.Test
 

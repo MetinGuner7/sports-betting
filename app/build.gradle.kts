@@ -39,6 +39,7 @@ dependencies {
     implementation(projects.core.monitor)
 
     implementation(projects.feature.splash)
+    implementation(projects.feature.login)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
