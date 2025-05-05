@@ -32,7 +32,7 @@ constructor(
                 }
             }
             is LoginEvent.OnButtonClicked -> {
-
+                verifyLogin()
             }
             is LoginEvent.NavigateRegister -> {
                 sendEventInViewModelScope(viewEvent)
@@ -58,6 +58,7 @@ constructor(
             },
             onError = { error -> },
         )*/
+        sendEventInViewModelScope(LoginEvent.NavigateToHome)
     }
 }
 

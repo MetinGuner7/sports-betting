@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.sports.common.base.Route
+import com.sports.home.ui.home
+import com.sports.home.ui.navigateToHomePopUpTo
 import com.sports.login.ui.login
 import com.sports.login.ui.navigateToLoginPopUpTo
 import com.sports.splash.ui.Splash
@@ -32,8 +34,11 @@ fun MainAppNavHost(
             navigateToHome = {},
         )
         login(
-            navigateToHome = {},
+            navigateToHome = navController::navigateToHomePopUpTo,
             navigateRegister = {}
+        )
+        home(
+            navigateToLogin = {}
         )
     }
 }

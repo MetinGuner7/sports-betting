@@ -10,4 +10,5 @@ data class LoginViewState(
     val username: String = "",
     val password: String = "",
     val isRememberMe: Boolean = false,
+    val enabledLoginButton: Boolean = true,
 ) : IViewState

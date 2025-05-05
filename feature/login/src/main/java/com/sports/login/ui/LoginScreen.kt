@@ -1,5 +1,6 @@
 package com.sports.login.ui
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -68,7 +69,9 @@ fun LoginContent(
         }
     ) { padding ->
         FormContent(
-            modifier = Modifier.padding(padding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
                 .padding(16.dp),
             uiState = uiState,
             onViewEvent = onViewEvent,
