@@ -43,7 +43,6 @@ fun AppCenterTopAppBar(
     onNavigationClick: () -> Unit = {},
     onActionClick: () -> Unit = {},
 ) {
-
     CenterAlignedTopAppBar(
         title = {
             MainText(

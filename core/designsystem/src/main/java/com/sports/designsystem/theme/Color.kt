@@ -4,11 +4,6 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-// Brand colors
-val brandColor = Color(0xFFE60000)
-// Same as light for brand consistency
-val brandColorVariant = Color(0xFF8C0102)
-
 // Gray scale
 val gray50: Color = Color(0xFFFAFAFA)
 val gray100: Color = Color(0xFFF5F5F5)
@@ -32,7 +27,7 @@ val white: Color = Color(0xFFFFFFFF)
 val black: Color = Color(0xFF000000)
 
 // Light Theme
-val primaryLight = brandColor
+val primaryLight = Color(0xFF1A237E)
 val backgroundLight = gray50
 val surfaceLight = white
 val onSurfaceLight = gray900
@@ -70,7 +65,7 @@ val surfaceContainerHighestLight = white
 
 // Dark Theme
 // Note: For dark theme, we'd typically invert many of these relationships
-val primaryDark = brandColor
+val primaryDark = Color(0xFF1A237E)
 val backgroundDark = gray900
 val surfaceDark = gray800
 val onSurfaceDark = gray100
