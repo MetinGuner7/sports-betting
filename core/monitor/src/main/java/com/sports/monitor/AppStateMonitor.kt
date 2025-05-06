@@ -11,10 +11,8 @@ interface AppStateMonitor {
     suspend fun showDialog(
         message: String,
         title: String? = null,
-        cancelable: Boolean = true,
         positiveButtonText: String? = null,
         negativeButtonText: String? = null,
-        neutralButtonText: String? = null,
         onPositiveClick: (() -> Unit)? = null,
         onNegativeClick: (() -> Unit)? = null,
         onNeutralClick: (() -> Unit)? = null,

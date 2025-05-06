@@ -63,19 +63,6 @@ fun MainApp(
                 if (currentDestination?.route != Splash::class.qualifiedName) {
                     appState.navController.navigateToSplashPopUpTo()
                 }
-                //                // Handle unauthorized event by navigating to the login screen
-                //                currentOnViewEvent(
-                //                    MainActivityViewEvent.OnNavigateLogin(
-                //                        onResult = {
-                //                            if (appState.navController.currentDestination?.route
-                // != Login::class.qualifiedName) {
-                //                                // Navigate to the login screen and pop up to it
-                //                                //
-                //                                appState.navController.navigateToSplashPopUpTo()
-                //                            }
-                //                        }
-                //                    )
-                //                )
             }
 
             // Handle show message event by displaying an error dialog
@@ -118,13 +105,9 @@ fun MainApp(
     if (uiState.showErrorModal) {
         AppInfoDialog(
             dialogType = uiState.dialogType ?: DialogType.ERROR,
-            title =
-                uiState.messageModel?.title?.ifBlank { uiState.messageModel.keyValue }.orEmpty(),
+            title = uiState.messageModel?.title.orEmpty(),
             message =
-                uiState.messageModel
-                    ?.message
-                    ?.ifBlank { uiState.messageModel.keyMessageValue }
-                    .orEmpty(),
+                uiState.messageModel?.message.orEmpty(),
             buttonText = uiState.messageModel?.buttonPositive.orEmpty(),
             negativeButtonText = uiState.messageModel?.buttonNegative,
             onDismissRequest = { onViewEvent(MainActivityViewEvent.OnDismissErrorDialog) },
