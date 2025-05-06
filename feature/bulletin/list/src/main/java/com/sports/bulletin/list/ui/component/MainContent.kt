@@ -3,7 +3,6 @@ package com.sports.bulletin.list.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -17,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.sports.bulletin.list.ui.BulletinListEvent
 import com.sports.component.domain.model.SportDomainModel
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.ui.extentions.containsEmoji
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -48,9 +47,9 @@ fun MainContent(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    MainText(text = "Veriler yüklenirken hata oluştu.")
+                    AppText(text = "Veriler yüklenirken hata oluştu.")
                     Spacer(modifier = Modifier.height(8.dp))
-                    MainText(
+                    AppText(
                         text = error,
                         style = MaterialTheme.typography.bodySmall
                     )
@@ -58,13 +57,13 @@ fun MainContent(
 
                 }
             }
-        } else if (isLoading && sports.isEmpty()) {
+        } else if (isLoading.not() && sports.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                MainText(text = "Gösterilecek spor etkinliği bulunamadı.")
+                AppText(text = "Gösterilecek spor etkinliği bulunamadı.")
             }
         } else {
             LazyColumn(
@@ -77,7 +76,9 @@ fun MainContent(
                 ) { sport ->
                     SportListItem(
                         sport = sport,
-                        onClick = { }
+                        onClick = {
+                            onViewEvent(BulletinListEvent.NavigateToBulletinDetail(sport.key))
+                        }
                     )
                 }
             }

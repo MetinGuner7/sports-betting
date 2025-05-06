@@ -26,7 +26,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.icons.AppIcons
 import com.sports.designsystem.icons.Check
 import com.sports.designsystem.theme.AppTheme
@@ -95,7 +95,7 @@ fun AppCheckbox(
             }
         }
         label?.let {
-            MainText(
+            AppText(
                 modifier = Modifier.padding(start = 8.dp),
                 text = label,
                 style =

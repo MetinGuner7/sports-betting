@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.sports.designsystem.theme.AppTheme
 
 @Composable
-fun MainText(
+fun AppText(
     text: String,
     modifier: Modifier = Modifier,
     style: TextStyle =
@@ -42,7 +42,7 @@ fun MainText(
 @Preview(showBackground = true)
 private fun MainTextPreview() {
     AppTheme {
-        MainText(
+        AppText(
             text = "Hello, World!",
             style =
                 MaterialTheme.typography.bodyMedium.copy(

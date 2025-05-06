@@ -43,6 +43,7 @@ dependencies {
     implementation(projects.feature.login)
     implementation(projects.feature.home)
     implementation(projects.feature.bulletin.list)
+    implementation(projects.feature.bulletin.detail)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

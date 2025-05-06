@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.sports.common.model.DialogType
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.theme.AppTheme
 import com.sports.designsystem.theme.MediumSpacer
 import com.sports.designsystem.theme.XLargeSpacer
@@ -78,7 +78,7 @@ fun AppInfoDialog(
                     }
 
                     if (title.isNotBlank()) {
-                        MainText(
+                        AppText(
                             text = title,
                             style = MaterialTheme.typography.titleMedium.semibold,
                             textAlign = TextAlign.Center,
@@ -87,7 +87,7 @@ fun AppInfoDialog(
                     if (message.isNotBlank()) {
                         XLargeSpacer()
                     }
-                    MainText(
+                    AppText(
                         text = message,
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,

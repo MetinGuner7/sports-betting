@@ -25,10 +25,12 @@ fun NavController.navigateToBulletinListPopUpTo(navOptions: NavOptions? = null) 
 
 fun NavGraphBuilder.bulletinList(
     navigateToLogin: () -> Unit,
+    navigateToBulletinDetail: (String) -> Unit,
 ) {
     composable<BulletinList>() {
         BulletinListRoute(
-            navigateToLogin = navigateToLogin
+            navigateToLogin = navigateToLogin,
+            navigateToBulletinDetail = navigateToBulletinDetail
         )
     }
 }

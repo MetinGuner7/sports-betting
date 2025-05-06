@@ -24,6 +24,7 @@ import kotlinx.collections.immutable.toPersistentList
 @Composable
 fun BulletinListRoute(
     navigateToLogin: () -> Unit,
+    navigateToBulletinDetail: (String) -> Unit,
     viewModel: BulletinListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -34,6 +35,9 @@ fun BulletinListRoute(
             }
             is BulletinListEvent.NavigateToLogin -> {
                 navigateToLogin()
+            }
+            is BulletinListEvent.NavigateToBulletinDetail -> {
+                navigateToBulletinDetail(event.key)
             }
         }
     }
@@ -92,7 +96,7 @@ private fun BulletinListSuccessPreview() {
         BulletinListScreen(
             uiState = BulletinListViewState(
                 loading = false,
-                allSports = sampleSports.toPersistentList()
+                filteredSports = sampleSports.toPersistentList()
             ),
             onViewEvent = {},
         )

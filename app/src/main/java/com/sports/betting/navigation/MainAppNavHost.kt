@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.sports.bulletin.detail.ui.bulletinDetail
+import com.sports.bulletin.detail.ui.navigateToBulletinDetail
 import com.sports.bulletin.list.ui.bulletinList
 import com.sports.bulletin.list.ui.navigateToBulletinList
 import com.sports.bulletin.list.ui.navigateToBulletinListPopUpTo
@@ -44,7 +46,13 @@ fun MainAppNavHost(
             navigateToLogin = {}
         )
         bulletinList(
-            navigateToLogin = {}
+            navigateToLogin = {},
+            navigateToBulletinDetail = {
+                navController.navigateToBulletinDetail(key = it)
+            }
+        )
+        bulletinDetail(
+            navigateBack = navController::navigateUp
         )
     }
 }

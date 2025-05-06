@@ -41,6 +41,9 @@ constructor(
                 }
             }
             is BulletinListEvent.OnKeyChanged -> onKeyChanged(viewEvent.value)
+            is BulletinListEvent.NavigateToBulletinDetail ->
+                sendEventInViewModelScope(BulletinListEvent.NavigateToBulletinDetail(viewEvent.key))
+
         }
     }
 
@@ -100,4 +103,7 @@ sealed interface BulletinListEvent : BaseEvent {
     data class OnKeyChanged(val value: String) : BulletinListEvent
 
     data object OnCloseIcon : BulletinListEvent
+
+    data class NavigateToBulletinDetail(val key: String) : BulletinListEvent
+
 }

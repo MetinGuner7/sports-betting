@@ -3,7 +3,6 @@ package com.sports.login.ui.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
@@ -24,10 +23,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.theme.AppTheme
 import com.sports.designsystem.theme.XLargeSpacer
-import com.sports.designsystem.theme.XXLargeSpacer
 import com.sports.designsystem.theme.XXXLargeSpacer
 import com.sports.designsystem.theme.semibold
 import com.sports.login.ui.LoginEvent
@@ -52,7 +50,7 @@ fun FormContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ){
-                MainText(
+                AppText(
                     text = "Welcome to\n" +
                             "Sports Betting\n" +
                             "family !",
