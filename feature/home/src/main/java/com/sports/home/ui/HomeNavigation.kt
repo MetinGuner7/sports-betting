@@ -23,7 +23,6 @@ fun NavController.navigateToHomePopUpTo(navOptions: NavOptions? = null) {
     )
 }
 
-@Suppress("LongParameterList")
 fun NavGraphBuilder.home(
     navigateToLogin: () -> Unit,
 ) {

@@ -37,10 +37,12 @@ dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.ui)
     implementation(projects.core.monitor)
+    implementation(projects.core.network)
 
     implementation(projects.feature.splash)
     implementation(projects.feature.login)
     implementation(projects.feature.home)
+    implementation(projects.feature.bulletin.list)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -52,6 +54,8 @@ dependencies {
     implementation(libs.androidx.core.splash)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

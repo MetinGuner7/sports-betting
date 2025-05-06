@@ -39,7 +39,10 @@ fun AppCenterTopAppBar(
     navigationIconContentDescription: String? = null,
     actionIcon: ImageVector? = null,
     actionIconContentDescription: String? = null,
-    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+        containerColor = MaterialTheme.colorScheme.primary,
+        titleContentColor = MaterialTheme.colorScheme.surface
+    ),
     onNavigationClick: () -> Unit = {},
     onActionClick: () -> Unit = {},
 ) {

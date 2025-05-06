@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.sports.bulletin.list.ui.bulletinList
+import com.sports.bulletin.list.ui.navigateToBulletinList
+import com.sports.bulletin.list.ui.navigateToBulletinListPopUpTo
 import com.sports.common.base.Route
 import com.sports.home.ui.home
 import com.sports.home.ui.navigateToHomePopUpTo
@@ -30,7 +33,7 @@ fun MainAppNavHost(
         popExitTransition = { ExitTransition.None },
     ) {
         splash(
-            navigateToLogin = navController::navigateToLoginPopUpTo,
+            navigateToLogin = navController::navigateToBulletinListPopUpTo,
             navigateToHome = {},
         )
         login(
@@ -38,6 +41,9 @@ fun MainAppNavHost(
             navigateRegister = {}
         )
         home(
+            navigateToLogin = {}
+        )
+        bulletinList(
             navigateToLogin = {}
         )
     }

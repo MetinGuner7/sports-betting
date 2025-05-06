@@ -29,10 +29,8 @@ class DefaultAppStateMonitor @Inject constructor() : AppStateMonitor {
     override suspend fun showDialog(
         message: String,
         title: String?,
-        cancelable: Boolean,
         positiveButtonText: String?,
         negativeButtonText: String?,
-        neutralButtonText: String?,
         onPositiveClick: (() -> Unit)?,
         onNegativeClick: (() -> Unit)?,
         onNeutralClick: (() -> Unit)?,
@@ -44,10 +42,8 @@ class DefaultAppStateMonitor @Inject constructor() : AppStateMonitor {
                     FriendlyMessageDTO(
                         title = title,
                         message = message,
-                        cancelable = cancelable,
                         buttonPositive = positiveButtonText,
                         buttonNegative = negativeButtonText,
-                        buttonNeutral = neutralButtonText,
                         positiveButtonClick = onPositiveClick,
                         negativeButtonClick = onNegativeClick,
                     ),
