@@ -3,12 +3,10 @@ package com.sports.bulletin.detail.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -23,9 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sports.bulletin.detail.ui.component.BulletinDetailMainContent
-import com.sports.bulletin.detail.ui.component.EventHeader
-import com.sports.bulletin.detail.ui.component.MarketOddsItem
-import com.sports.component.domain.model.SportDomainModel
+import com.sports.component.domain.model.testEventDetailDomainModel
 import com.sports.designsystem.component.AppText
 import com.sports.designsystem.icons.AppIcons
 import com.sports.designsystem.icons.LeftArrowIcon
@@ -34,8 +30,6 @@ import com.sports.ui.component.AppCenterTopAppBar
 import com.sports.ui.component.AppLoading
 import com.sports.ui.extentions.ObserveAsEvents
 import com.sports.ui.extentions.TrackScreenViewEvent
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun BulletinDetailRoute(
@@ -99,10 +93,12 @@ fun BulletinDetailScreen(
                 }
 
                 else -> {
-                    BulletinDetailMainContent(
-                        uiState = uiState,
-                        onAddBetClick = { _, _, _, _ -> },
-                    )
+                    Column {
+                        BulletinDetailMainContent(
+                            eventDetail = uiState.eventDetail,
+                            onAddBetClick = { _, _, _, _, _ -> },
+                        )
+                    }
                 }
             }
         }
@@ -114,19 +110,11 @@ fun BulletinDetailScreen(
 @Composable
 private fun BulletinDetailSuccessPreview() {
     AppTheme {
-        val sampleSports = List(5) { index ->
-            SportDomainModel(
-                key = "key$index",
-                group = "Soccer",
-                title = "League $index",
-                description = "Desc $index",
-                isActive = true,
-                hasOutrights = false
-            )
-        }
+
         BulletinDetailScreen(
             uiState = BulletinDetailViewState(
                 loading = false,
+                eventDetail = testEventDetailDomainModel()
             ),
             onViewEvent = {},
         )

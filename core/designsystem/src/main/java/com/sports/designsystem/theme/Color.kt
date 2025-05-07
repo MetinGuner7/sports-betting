@@ -26,8 +26,20 @@ val red400: Color = Color(0xFFB42318)
 val white: Color = Color(0xFFFFFFFF)
 val black: Color = Color(0xFF000000)
 
+val Primary50 = Color(0xFFEDF0FF)
+val Primary100 = Color(0xFFDEE4FF)
+val Primary200 = Color(0xFFC4CDFF)
+val Primary300 = Color(0xFFA0ACFF)
+val Primary400 = Color(0xFF7A7FFF)
+val Primary500 = Color(0xFF4D48F9)
+val Primary600 = Color(0xFF4F3CEF)
+val Primary700 = Color(0xFF432FD3)
+val Primary800 = Color(0xFF3729AA)
+val Primary900 = Color(0xFF312986)
+val Primary950 = Color(0xFF1E184E)
+
 // Light Theme
-val primaryLight = Color(0xFF1A237E)
+val primaryLight = Primary800
 val backgroundLight = gray50
 val surfaceLight = white
 val onSurfaceLight = gray900
@@ -42,7 +54,7 @@ val primaryContainerLight = gray100
 val onPrimaryContainerLight = gray900
 val secondaryLight = gray500
 val onSecondaryLight = white
-val secondaryContainerLight = gray200
+val secondaryContainerLight = Primary100
 val onSecondaryContainerLight = gray900
 val tertiaryLight = gray400
 val onTertiaryLight = white

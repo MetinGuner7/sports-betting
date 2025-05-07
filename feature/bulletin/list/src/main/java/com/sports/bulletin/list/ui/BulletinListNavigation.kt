@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.sports.common.base.Route
+import com.sports.component.domain.model.EventDetailDomainModel
 import kotlinx.serialization.Serializable
 
 private const val DEEPLINK_KEY = "BulletinList"
@@ -25,7 +26,7 @@ fun NavController.navigateToBulletinListPopUpTo(navOptions: NavOptions? = null) 
 
 fun NavGraphBuilder.bulletinList(
     navigateToLogin: () -> Unit,
-    navigateToBulletinDetail: (String) -> Unit,
+    navigateToBulletinDetail: (EventDetailDomainModel) -> Unit,
 ) {
     composable<BulletinList>() {
         BulletinListRoute(

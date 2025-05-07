@@ -14,7 +14,6 @@ data class BulletinDetailViewState(
     override val showErrorModal: Boolean = false,
     val eventDetail: EventDetailDomainModel? = null,
     val eventDetails: ImmutableList<EventDetailDomainModel> = persistentListOf(),
-    val markets: ImmutableList<Market> = persistentListOf(),
     val error: String? = null,
     val searchQuery: String = "",
     val key: String = "",

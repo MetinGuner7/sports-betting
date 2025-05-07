@@ -44,6 +44,7 @@ dependencies {
     implementation(projects.feature.auth.register)
     implementation(projects.feature.bulletin.list)
     implementation(projects.feature.bulletin.detail)
+    implementation(projects.feature.bulletin.component)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

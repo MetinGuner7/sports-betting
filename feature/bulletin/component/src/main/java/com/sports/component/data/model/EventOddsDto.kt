@@ -1,12 +1,12 @@
 package com.sports.component.data.model
 
+import com.sports.component.domain.model.Bookmaker
 import com.sports.component.domain.model.EventDetailDomainModel
 import com.sports.component.domain.model.Market
 import com.sports.component.domain.model.Outcome
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toImmutableList
 
 @JsonClass(generateAdapter = true)
 data class EventOddsDto(
@@ -52,9 +52,6 @@ fun EventOddsDto.toDomainModel(): EventDetailDomainModel? {
     if (this.sportKey == null || this.homeTeam == null || this.awayTeam == null) {
         return null
     }
-
-    val marketsFromFirstBookmaker = this.bookmakers?.firstOrNull()?.markets
-
     return EventDetailDomainModel(
         id = this.id,
         sportKey = this.sportKey,
@@ -62,22 +59,31 @@ fun EventOddsDto.toDomainModel(): EventDetailDomainModel? {
         startTime = this.commenceTime,
         homeTeam = this.homeTeam,
         awayTeam = this.awayTeam,
-        markets = marketsFromFirstBookmaker?.mapNotNull { it.toDomainModel() }?.toImmutableList() ?: persistentListOf()
+        bookmakers = this.bookmakers?.mapNotNull { it.toDomainModel() }?.toList() ?: persistentListOf()
+    )
+}
+
+fun BookmakerDto.toDomainModel(): Bookmaker? {
+    if (this.key == null || this.markets == null) return null
+    return Bookmaker(
+        key = this.key,
+        lastUpdate = this.lastUpdate,
+        title = this.title,
+        markets = this.markets.mapNotNull { it.toDomainModel() }.toList()
     )
 }
 
 fun MarketDto.toDomainModel(): Market? {
     if (this.key == null || this.outcomes == null) return null
-
     return Market(
         key = this.key,
-        outcomes = this.outcomes.mapNotNull { it.toDomainModel() }.toImmutableList()
+        lastUpdate = this.lastUpdate,
+        outcomes = this.outcomes.mapNotNull { it.toDomainModel() }.toList()
     )
 }
 
 fun OutcomeDto.toDomainModel(): Outcome? {
     if (this.name == null || this.price == null) return null
-
     return Outcome(
         name = this.name,
         price = this.price,

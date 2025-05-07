@@ -6,15 +6,19 @@ import androidx.navigation.toRoute
 import com.sports.analytics.AnalyticsHelper
 import com.sports.common.base.BaseEvent
 import com.sports.common.base.BaseViewModel
+import com.sports.common.base.CustomNavTypes
 import com.sports.component.data.model.EventOddsRequest
+import com.sports.component.domain.model.EventDetailDomainModel
 import com.sports.component.domain.usecase.GetEventDetailsUseCase
 import com.sports.component.domain.usecase.GetSportsUseCase
+import com.sports.component.ui.BulletinNavType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.reflect.typeOf
 
 
 @HiltViewModel
@@ -22,7 +26,6 @@ class BulletinDetailViewModel
 @Inject
 constructor(
     private val analyticsHelper: AnalyticsHelper,
-    private val getEventDetailsUseCase: GetEventDetailsUseCase,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel<BulletinDetailViewState>(){
 
@@ -39,21 +42,11 @@ constructor(
     }
 
     init {
-        val key = savedStateHandle.toRoute<BulletinDetail>().key
-        getEventDetails(key)
-    }
-
-    private fun getEventDetails(key: String) {
-        executeUseCase(
-            useCase = getEventDetailsUseCase,
-            parameter = EventOddsRequest(key = key),
-            onSuccess = {
-                setState { copy(eventDetails = it.toPersistentList()) }
-            },
-            onError = {
-                setState { copy(error = it?.message) }
-            },
-        )
+        val sport = savedStateHandle
+            .toRoute<BulletinDetail>(
+                typeMap = mapOf(typeOf<EventDetailDomainModel>() to CustomNavTypes.BulletinNavType)
+            )
+        setState { copy(eventDetail = sport.sport) }
     }
 }
 
