@@ -142,7 +142,7 @@ val Typography =
             TextStyle(
                 fontFamily = inter,
                 fontWeight = FontWeight.Medium,
-                fontSize = 12.sp,
+                fontSize = 10.sp,
                 lineHeight = 16.sp,
             ),
     )

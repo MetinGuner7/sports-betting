@@ -6,14 +6,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.sports.bulletin.detail.ui.bulletinDetail
+import com.sports.bulletin.detail.ui.navigateToBulletinDetail
 import com.sports.bulletin.list.ui.bulletinList
-import com.sports.bulletin.list.ui.navigateToBulletinList
 import com.sports.bulletin.list.ui.navigateToBulletinListPopUpTo
 import com.sports.common.base.Route
-import com.sports.home.ui.home
-import com.sports.home.ui.navigateToHomePopUpTo
-import com.sports.login.ui.login
-import com.sports.login.ui.navigateToLoginPopUpTo
+import com.sports.auth.login.ui.login
+import com.sports.auth.login.ui.navigateToLogin
+import com.sports.auth.login.ui.navigateToLoginPopUpTo
+import com.sports.auth.register.ui.navigateToRegister
+import com.sports.auth.register.ui.register
 import com.sports.splash.ui.Splash
 import com.sports.splash.ui.splash
 
@@ -33,18 +35,26 @@ fun MainAppNavHost(
         popExitTransition = { ExitTransition.None },
     ) {
         splash(
-            navigateToLogin = navController::navigateToBulletinListPopUpTo,
-            navigateToHome = {},
+            navigateToLogin = navController::navigateToLoginPopUpTo,
+            navigateToHome = navController::navigateToBulletinListPopUpTo,
         )
         login(
-            navigateToHome = navController::navigateToHomePopUpTo,
-            navigateRegister = {}
+            navigateToHome = navController::navigateToBulletinListPopUpTo,
+            navigateRegister = navController::navigateToRegister
         )
-        home(
-            navigateToLogin = {}
+        register(
+            navigateToHome = navController::navigateToBulletinListPopUpTo,
+            navigateLogin = navController::navigateToLogin,
+            navigateBack = navController::navigateUp
         )
         bulletinList(
-            navigateToLogin = {}
+            navigateToLogin = {},
+            navigateToBulletinDetail = {
+                navController.navigateToBulletinDetail(key = it)
+            }
+        )
+        bulletinDetail(
+            navigateBack = navController::navigateUp
         )
     }
 }

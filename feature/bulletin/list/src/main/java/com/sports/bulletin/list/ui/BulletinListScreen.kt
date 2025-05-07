@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sports.bulletin.list.ui.component.MainContent
+import com.sports.component.domain.model.EventDetailDomainModel
 import com.sports.component.domain.model.SportDomainModel
 import com.sports.designsystem.theme.AppTheme
 import com.sports.ui.component.AppCenterTopAppBar
@@ -24,6 +25,7 @@ import kotlinx.collections.immutable.toPersistentList
 @Composable
 fun BulletinListRoute(
     navigateToLogin: () -> Unit,
+    navigateToBulletinDetail: (EventDetailDomainModel) -> Unit,
     viewModel: BulletinListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -34,6 +36,9 @@ fun BulletinListRoute(
             }
             is BulletinListEvent.NavigateToLogin -> {
                 navigateToLogin()
+            }
+            is BulletinListEvent.NavigateToEventDetail -> {
+                navigateToBulletinDetail(event.sport)
             }
         }
     }
@@ -63,11 +68,8 @@ fun BulletinListScreen(
                 .fillMaxSize()
         ) {
             MainContent(
-                isLoading = uiState.loading,
+                uiState = uiState,
                 modifier = Modifier,
-                sports = uiState.filteredSports,
-                error = uiState.error,
-                searchQuery = uiState.searchQuery,
                 onViewEvent = onViewEvent,
             )
         }
@@ -75,51 +77,36 @@ fun BulletinListScreen(
 }
 
 
-@Preview(showBackground = true, name = "BulletinList - Success")
+@Preview(showBackground = true, name = "BulletinList - Success (Leagues & Events Loaded)")
 @Composable
 private fun BulletinListSuccessPreview() {
     AppTheme {
-        val sampleSports = List(5) { index ->
-            SportDomainModel(
-                key = "key$index",
-                group = "Soccer",
-                title = "League $index",
-                description = "Desc $index",
-                isActive = true,
-                hasOutrights = false
-            )
-        }
+        val sampleSports = persistentListOf(
+            SportDomainModel(key = "soccer_epl", group = "Soccer", title = "Premier League", description = "English Premier League", isActive = true, hasOutrights = false),
+            SportDomainModel(key = "basketball_nba", group = "Basketball", title = "NBA", description = "US Basketball", isActive = true, hasOutrights = false),
+            SportDomainModel(key = "americanfootball_nfl", group = "Football", title = "NFL", description = "US Football", isActive = true, hasOutrights = false)
+        )
+
+        val sampleEvents = persistentListOf(
+            EventDetailDomainModel(id = "evt1", sportKey = "soccer_epl", sportTitle = "Premier League", startTime = "2025-05-10T18:00:00Z", homeTeam = "Man City", awayTeam = "Arsenal", bookmakers = persistentListOf()),
+            EventDetailDomainModel(id = "evt2", sportKey = "soccer_epl", sportTitle = "Premier League", startTime = "2025-05-10T20:30:00Z", homeTeam = "Liverpool", awayTeam = "Chelsea", bookmakers = persistentListOf())
+        )
+
         BulletinListScreen(
             uiState = BulletinListViewState(
-                loading = false,
-                allSports = sampleSports.toPersistentList()
+                isLoadingSports = false,
+                sportsList = sampleSports,
+                selectedSportKey = "soccer_epl",
+                isLoadingEvents = false,
+                eventsForSelectedSport = sampleEvents,
+                filteredEventsForSelectedSport = sampleEvents,
+                searchQuery = ""
             ),
             onViewEvent = {},
         )
     }
 }
 
-@Preview(showBackground = true, name = "BulletinList - Loading")
-@Composable
-private fun BulletinListLoadingPreview() {
-    AppTheme {
-        BulletinListScreen(
-            uiState = BulletinListViewState(loading = true),
-            onViewEvent = {},
-        )
-    }
-}
-
-@Preview(showBackground = true, name = "BulletinList - Empty")
-@Composable
-private fun BulletinListEmptyPreview() {
-    AppTheme {
-        BulletinListScreen(
-            uiState = BulletinListViewState(loading = false, allSports = persistentListOf()),
-            onViewEvent = {},
-        )
-    }
-}
 
 @Preview
 @Composable

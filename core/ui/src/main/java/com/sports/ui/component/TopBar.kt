@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreVert
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -16,16 +15,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.icons.AppIcons
-import com.sports.designsystem.icons.Cancel
 import com.sports.designsystem.icons.LeftArrowIcon
 import com.sports.designsystem.theme.AppTheme
 import com.sports.designsystem.theme.semibold
@@ -48,7 +48,7 @@ fun AppCenterTopAppBar(
 ) {
     CenterAlignedTopAppBar(
         title = {
-            MainText(
+            AppText(
                 text = title,
                 style = MaterialTheme.typography.titleMedium.semibold,
                 textAlign = TextAlign.Center,
@@ -57,7 +57,10 @@ fun AppCenterTopAppBar(
         navigationIcon = {
             navigationIcon?.let { icon ->
                 IconButton(onClick = { onNavigationClick() }) {
-                    Image(imageVector = icon, contentDescription = navigationIconContentDescription)
+                    Image(imageVector = icon,
+                        contentDescription = navigationIconContentDescription,
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.surface)
+                    )
                 }
             }
         },
@@ -67,6 +70,7 @@ fun AppCenterTopAppBar(
                     Image(
                         imageVector = actionIcon,
                         contentDescription = actionIconContentDescription,
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.surface)
                     )
                 }
             }
@@ -86,7 +90,7 @@ fun AppBottomSheetTopAppBar(
             modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, bottom = 9.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
-            MainText(
+            AppText(
                 text = title,
                 style = MaterialTheme.typography.titleMedium.semibold,
                 textAlign = TextAlign.Center,

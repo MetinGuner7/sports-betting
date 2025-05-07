@@ -7,8 +7,13 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.withStyle
 import androidx.core.content.ContextCompat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 import java.util.regex.Pattern
 
 fun String.parseBold(fontWeight: FontWeight = FontWeight.Bold): AnnotatedString {
@@ -47,4 +52,20 @@ fun String.copyToClipboard(context: Context) {
     val clipboard = ContextCompat.getSystemService(context, ClipboardManager::class.java)
     val clip = ClipData.newPlainText("Copied Text", this)
     clipboard?.setPrimaryClip(clip)
+}
+
+fun String.toReadableDateTime(
+    targetFormatPattern: String = "dd MMMM yyyy HH:mm",
+    targetZoneId: ZoneId = ZoneId.systemDefault()
+): String {
+    return try {
+        val instant = Instant.parse(this)
+        val zonedDateTime = instant.atZone(targetZoneId)
+        val formatter = DateTimeFormatter.ofPattern(targetFormatPattern, java.util.Locale.ENGLISH)
+        zonedDateTime.format(formatter)
+    } catch (e: DateTimeParseException) {
+        this
+    } catch (e: Exception) {
+        this
+    }
 }

@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.icons.AppIcons
 import com.sports.designsystem.icons.EmptyList
 import com.sports.designsystem.theme.AppTheme
@@ -39,10 +39,10 @@ fun EmptyPageView(
     ) {
         Image(icon, contentDescription = null)
         XLargeSpacer()
-        MainText(text = title,
+        AppText(text = title,
             style = MaterialTheme.typography.bodyLarge.semibold)
         MediumSpacer()
-        MainText(
+        AppText(
             text = description,
             style =
                 MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.tertiary),

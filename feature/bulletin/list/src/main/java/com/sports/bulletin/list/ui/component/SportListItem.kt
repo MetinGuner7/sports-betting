@@ -15,10 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sports.bulletin.list.ui.BulletinListScreen
-import com.sports.bulletin.list.ui.BulletinListViewState
 import com.sports.component.domain.model.SportDomainModel
-import com.sports.designsystem.component.MainText
+import com.sports.designsystem.component.AppText
 import com.sports.designsystem.theme.AppTheme
 
 @Composable
@@ -35,20 +33,20 @@ fun SportListItem(
         shape = MaterialTheme.shapes.medium
     ) {
         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
-            MainText(
+            AppText(
                 text = sport.title,
                 style = MaterialTheme.typography.titleMedium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(4.dp))
-            MainText(
+            AppText(
                 text = sport.group,
                 style = MaterialTheme.typography.bodyMedium,
             )
             sport.description.let { desc ->
                 Spacer(modifier = Modifier.height(6.dp))
-                MainText(
+                AppText(
                     text = desc,
                     style = MaterialTheme.typography.bodySmall,
                     maxLines = 2,

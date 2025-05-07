@@ -12,4 +12,5 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity.compose)
+    implementation(projects.feature.auth.component)
 }
