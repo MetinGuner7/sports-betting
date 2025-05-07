@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.sports.betting"
         versionCode = 1000
-        versionName = "0.0.39"
+        versionName = "0.0.01"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -40,8 +40,8 @@ dependencies {
     implementation(projects.core.network)
 
     implementation(projects.feature.splash)
-    implementation(projects.feature.login)
-    implementation(projects.feature.home)
+    implementation(projects.feature.auth.login)
+    implementation(projects.feature.auth.register)
     implementation(projects.feature.bulletin.list)
     implementation(projects.feature.bulletin.detail)
 

@@ -4,13 +4,15 @@ plugins {
 }
 
 android {
+    namespace = "com.sports.auth.component"
+
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    namespace = "com.sports.splash"
 }
 
 dependencies {
-    implementation(libs.androidx.activity.compose)
-    implementation(projects.feature.auth.component)
+    api(platform(libs.firebase.bom))
+    api(libs.firebase.auth)
+    implementation(libs.kotlinx.coroutines.play.services)
 }

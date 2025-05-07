@@ -1,6 +1,7 @@
 package com.sports.splash.ui
 
 import androidx.lifecycle.viewModelScope
+import com.sports.auth.component.domain.usecase.GetCurrentUserUseCase
 import com.sports.common.base.BaseEvent
 import com.sports.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class SplashViewModel
 @Inject
 constructor(
-
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
 ) : BaseViewModel<SplashViewState>() {
 
     override fun createInitialState(): SplashViewState = SplashViewState()
@@ -22,24 +23,24 @@ constructor(
     init {
         viewModelScope.launch {
             delay(3000)
-            sendEventInViewModelScope(SplashEvent.NavigateToLogin)
+            checkToken()
 
         }
     }
 
     private fun checkToken() {
-/*        executeUseCase(
-            useCase = checkTokenUseCase,
+        executeUseCase(
+            useCase = getCurrentUserUseCase,
             parameter = Unit,
-            onSuccess = { token ->
-                if (token.isEmpty()) {
-                    sendEventInViewModelScope(SplashEvent.NavigateToLogin(false))
+            onSuccess = { isLogin ->
+                if (isLogin) {
+                    sendEventInViewModelScope(SplashEvent.NavigateToHome)
                 } else {
-                    viewModelScope.launch { getProfile() }
+                    sendEventInViewModelScope(SplashEvent.NavigateToLogin)
                 }
             },
-            onError = { sendEventInViewModelScope(SplashEvent.NavigateToLogin(false)) },
-        )*/
+            onError = { sendEventInViewModelScope(SplashEvent.NavigateToLogin) },
+        )
     }
 
 

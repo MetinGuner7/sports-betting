@@ -15,8 +15,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
@@ -55,7 +57,10 @@ fun AppCenterTopAppBar(
         navigationIcon = {
             navigationIcon?.let { icon ->
                 IconButton(onClick = { onNavigationClick() }) {
-                    Image(imageVector = icon, contentDescription = navigationIconContentDescription)
+                    Image(imageVector = icon,
+                        contentDescription = navigationIconContentDescription,
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.surface)
+                    )
                 }
             }
         },
@@ -65,6 +70,7 @@ fun AppCenterTopAppBar(
                     Image(
                         imageVector = actionIcon,
                         contentDescription = actionIconContentDescription,
+                        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.surface)
                     )
                 }
             }
