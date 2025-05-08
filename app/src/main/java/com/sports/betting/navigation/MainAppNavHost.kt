@@ -17,6 +17,10 @@ import com.sports.auth.login.ui.navigateToLoginPopUpTo
 import com.sports.auth.register.ui.navigateToRegister
 import com.sports.auth.register.ui.register
 import com.sports.basket.ui.basket
+import com.sports.designsystem.animations.slideInFromLeft
+import com.sports.designsystem.animations.slideInFromRight
+import com.sports.designsystem.animations.slideOutToLeft
+import com.sports.designsystem.animations.slideOutToRight
 import com.sports.splash.ui.Splash
 import com.sports.splash.ui.splash
 
@@ -30,10 +34,10 @@ fun MainAppNavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier,
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-        popEnterTransition = { EnterTransition.None },
-        popExitTransition = { ExitTransition.None },
+        enterTransition = { slideInFromRight },
+        exitTransition = { slideOutToLeft },
+        popEnterTransition = { slideInFromLeft },
+        popExitTransition = { slideOutToRight },
     ) {
         splash(
             navigateToLogin = navController::navigateToLoginPopUpTo,
