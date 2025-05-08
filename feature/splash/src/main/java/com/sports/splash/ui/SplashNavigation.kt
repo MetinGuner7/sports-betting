@@ -15,7 +15,7 @@ fun NavController.navigateToSplash(navOptions: NavOptions? = null) {
     this.navigate(Splash, navOptions)
 }
 
-fun NavController.navigateToSplashPopUpTo(navOptions: NavOptions? = null) {
+fun NavController.navigateToSplashPopUpTo() {
     this.navigateToSplash(
         androidx.navigation.navOptions {
             popUpTo(this@navigateToSplashPopUpTo.graph.id) { inclusive = true }

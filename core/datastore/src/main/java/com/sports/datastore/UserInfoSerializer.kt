@@ -3,7 +3,7 @@ package com.sports.datastore
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
-import com.loodos.hrapp.vodafone.core.datastore.UserInfo
+import com.sports.core.datastore.UserInfo
 import java.io.InputStream
 import java.io.OutputStream
 import javax.inject.Inject

@@ -36,10 +36,10 @@ constructor(
                 if (isLogin) {
                     sendEventInViewModelScope(SplashEvent.NavigateToHome)
                 } else {
-                    sendEventInViewModelScope(SplashEvent.NavigateToLogin)
+                    sendEventInViewModelScope(SplashEvent.NavigateToHome)
                 }
             },
-            onError = { sendEventInViewModelScope(SplashEvent.NavigateToLogin) },
+            onError = { sendEventInViewModelScope(SplashEvent.NavigateToHome) },
         )
     }
 

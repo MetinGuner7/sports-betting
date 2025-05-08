@@ -153,9 +153,14 @@ fun SportChip(
     FilterChip(
         selected = isSelected,
         onClick = onClick,
-        label = { AppText(text = sport.title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+        label = { AppText(text = sport.title,
+            style = MaterialTheme.typography.bodySmall.copy(
+                color = if (isSelected) MaterialTheme.colorScheme.surface
+                else MaterialTheme.colorScheme.onSurface
+            ),
+            maxLines = 1, overflow = TextOverflow.Ellipsis) },
         modifier = modifier,
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(8.dp),
     )
 }
 

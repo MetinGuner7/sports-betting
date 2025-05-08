@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BulletinListViewModel @Inject constructor(
-    private val analyticsHelper: AnalyticsHelper,
     private val getSportsUseCase: GetSportsUseCase,
     private val getEventDetailsUseCase: GetEventDetailsUseCase
 ) : BaseViewModel<BulletinListViewState>() {

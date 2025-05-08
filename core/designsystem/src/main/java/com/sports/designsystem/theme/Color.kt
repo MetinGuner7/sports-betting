@@ -39,8 +39,8 @@ val Primary900 = Color(0xFF312986)
 val Primary950 = Color(0xFF1E184E)
 
 // Light Theme
-val primaryLight = Primary800
-val backgroundLight = gray50
+val primaryLight = Color(0xFF11212D)
+val backgroundLight = gray100
 val surfaceLight = white
 val onSurfaceLight = gray900
 val onBackgroundLight = gray900
@@ -54,7 +54,7 @@ val primaryContainerLight = gray100
 val onPrimaryContainerLight = gray900
 val secondaryLight = gray500
 val onSecondaryLight = white
-val secondaryContainerLight = Primary100
+val secondaryContainerLight = Color(0xFF9BA8AB)
 val onSecondaryContainerLight = gray900
 val tertiaryLight = gray400
 val onTertiaryLight = white
@@ -67,7 +67,7 @@ val scrimLight: Color = Color(0xFF000000).copy(alpha = 0.25f)
 val inverseSurfaceLight = gray800
 val inverseOnSurfaceLight = gray100
 val inversePrimaryLight = primaryLight.copy(alpha = 0.8f)
-val surfaceDimLight = gray100
+val surfaceDimLight = Color(0xFFFA5F1A)
 val surfaceBrightLight = white
 val surfaceContainerLowestLight = white
 val surfaceContainerLowLight = gray50
@@ -77,7 +77,7 @@ val surfaceContainerHighestLight = white
 
 // Dark Theme
 // Note: For dark theme, we'd typically invert many of these relationships
-val primaryDark = Color(0xFF1A237E)
+val primaryDark = Color(0xFFFF4E45)
 val backgroundDark = gray900
 val surfaceDark = gray800
 val onSurfaceDark = gray100

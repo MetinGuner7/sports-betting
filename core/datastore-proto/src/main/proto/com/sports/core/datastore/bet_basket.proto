@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_package = "com.sports.core.datastore";
+option java_multiple_files = true;
+
+message OutcomeProto {
+  string name = 1;
+  double price = 2;
+  optional double point = 3;
+}
+
+message BasketItemProto {
+  string selection_id = 1;
+  string event_id = 2;
+  string event_description = 3;
+  string sport_title = 4;
+  string market_key = 5;
+  string market_description = 6;
+  OutcomeProto outcome = 7;
+  string commence_time = 8;
+  string home_team = 9;
+  string away_team = 10;
+  string bookmakerKey = 11;
+}
+
+message BetBasketProto {
+  repeated BasketItemProto items = 1;
+}
