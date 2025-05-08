@@ -8,27 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import com.sports.basket.R
 import com.sports.basket.ui.BasketEvent
 import com.sports.datastore.model.BasketItem
-import com.sports.designsystem.icons.AppIcons
-import com.sports.designsystem.icons.Cancel
 import com.sports.designsystem.theme.AppTheme
 import com.sports.designsystem.theme.XXLargeSpacer
 import com.sports.designsystem.theme.semibold
@@ -49,16 +37,13 @@ fun BasketContent(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(basketItems, key = { item -> item.selectionId }) { item ->
-            BasketItemCard(
+            BasketItemContent(
                 item = item,
                 onRemoveClick = {
                     onViewEvent(BasketEvent.RemoveItem(item.selectionId))
                 },
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
-            if (item != basketItems.lastOrNull()) {
-                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-            }
         }
 
         if (basketItems.isNotEmpty()) {
@@ -71,49 +56,6 @@ fun BasketContent(
             }
         }
     }
-}
-
-@Composable
-fun BasketItemCard(
-    item: BasketItem,
-    onRemoveClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    ListItem(
-        headlineContent = {
-            Text(
-                text = "${item.homeTeam} vs ${item.awayTeam}",
-                style = MaterialTheme.typography.titleMedium.semibold,
-                maxLines = 2
-            )
-        },
-        supportingContent = {
-            Column {
-                Text(
-                    text = item.outcomeName,
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 1
-                )
-                Text(
-                    text = stringResource(R.string.stake, "%.2f".format(item.outcomePrice)),
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
-        },
-        trailingContent = {
-            IconButton(onClick = onRemoveClick) {
-                Icon(
-                    imageVector = AppIcons.Cancel,
-                    contentDescription = "Bahsi Kaldır",
-                    tint = MaterialTheme.colorScheme.error
-                )
-            }
-        },
-        colors = ListItemDefaults.colors(
-            containerColor = Color.Transparent
-        ),
-        modifier = modifier.fillMaxWidth()
-    )
 }
 
 @Composable
@@ -141,31 +83,6 @@ fun BasketSummarySection(
             onClick = onConfirmClick,
             modifier = Modifier.fillMaxWidth()
         )
-    }
-}
-
-class SampleBasketItemProvider : PreviewParameterProvider<BasketItem> {
-    override val values = sequenceOf(
-        BasketItem(
-            selectionId = "sel1", eventId = "evt1", marketKey = "mk1", bookmakerKey = "bm1",
-            homeTeam = "Ev Sahibi A Takımı", awayTeam = "Deplasman B Takımı",
-            outcomeName = "Ev Sahibi Kazanır", outcomePrice = 1.85
-        ),
-        BasketItem(
-            selectionId = "sel2", eventId = "evt2", marketKey = "mk2", bookmakerKey = "bm2",
-            homeTeam = "FC Harikalar", awayTeam = "SC Mucizeler",
-            outcomeName = "Toplam Gol 2.5 Üst", outcomePrice = 2.10
-        )
-    )
-}
-
-@Preview(showBackground = true, name = "Sepet Öğesi Kartı")
-@Composable
-private fun BasketItemCardPreview(
-    @PreviewParameter(SampleBasketItemProvider::class) item: BasketItem
-) {
-    AppTheme {
-        BasketItemCard(item = item, onRemoveClick = {})
     }
 }
 
