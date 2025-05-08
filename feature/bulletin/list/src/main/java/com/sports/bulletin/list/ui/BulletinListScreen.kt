@@ -20,7 +20,6 @@ import com.sports.ui.component.AppLoading
 import com.sports.ui.extentions.ObserveAsEvents
 import com.sports.ui.extentions.TrackScreenViewEvent
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun BulletinListRoute(
@@ -58,7 +57,7 @@ fun BulletinListScreen(
     Scaffold(
         topBar = {
             AppCenterTopAppBar(
-                title = "BulletinList",
+                title = "Ligler",
             )
         }
     ) { padding ->

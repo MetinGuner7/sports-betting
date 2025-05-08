@@ -4,7 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
@@ -25,6 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import com.sports.designsystem.icons.AppIcons
 import com.sports.designsystem.icons.Check
 import com.sports.designsystem.icons.Info
@@ -44,6 +45,7 @@ fun AppTextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = MaterialTheme.typography.bodyLarge,
+    labelTextStyle: TextStyle = MaterialTheme.typography.labelMedium,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = true,
@@ -54,83 +56,86 @@ fun AppTextField(
     shape: Shape = OutlinedTextFieldDefaults.shape,
     focusRequester: FocusRequester? = null,
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+    minHeight: Dp = 48.dp,
 ) {
-    Column(modifier = modifier) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .apply { if (focusRequester != null) focusRequester(focusRequester) },
-            enabled = enabled,
-            readOnly = readOnly,
-            textStyle = textStyle,
-            label = label?.let { { Text(it) } },
-            placeholder = placeholder?.let { { Text(it) } },
-            leadingIcon = leadingIcon,
-            trailingIcon = trailingIcon,
-            isError = isError,
-            visualTransformation = visualTransformation,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            singleLine = singleLine,
-            maxLines = maxLines,
-            minLines = minLines,
-            interactionSource = interactionSource,
-            shape = shape,
-            colors = colors,
-            supportingText = {
-                if (isError && errorText != null) {
-                    Text(
-                        text = errorText,
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                }
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = minHeight)
+            .then(if (focusRequester != null) Modifier.focusRequester(focusRequester) else Modifier),
+        enabled = enabled,
+        readOnly = readOnly,
+        textStyle = textStyle,
+        label = label?.let { { Text(it, style = labelTextStyle) } },
+        placeholder = placeholder?.let { { Text(it) } },
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
+        isError = isError,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
+        interactionSource = interactionSource,
+        shape = shape,
+        colors = colors,
+        supportingText = if (isError && errorText != null) {
+            {
+                Text(
+                    text = errorText,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.labelSmall
+                )
             }
-        )
-    }
+        } else {
+            null
+        }
+    )
 }
 
-@Preview(showBackground = true)
+
+@Preview(showBackground = true, name = "TextField - Normal (Küçültülmüş)")
 @Composable
 private fun TextFieldPreview() {
     AppTheme {
         Column(Modifier.padding(16.dp)) {
             AppTextField(
-                focusRequester = FocusRequester(),
-                label = "Mağaza",
-                placeholder = "Filtrele",
+                label = "Etiket",
+                placeholder = "Placeholder",
                 onValueChange = {},
-                value = ""
-            )
-        }
-
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun TextFieldDisabledPreview() {
-    AppTheme {
-        Column(Modifier.padding(16.dp)) {
-            AppTextField(
-                focusRequester = FocusRequester(),
-                value = "Preview",
-                onValueChange = {},
-                enabled = false,
+                value = "",
+                 minHeight = 40.dp
             )
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "TextField - Değerli (Küçültülmüş)")
 @Composable
-private fun TextFieldWithTrailingPreview() {
+private fun TextFieldWithValuePreview() {
     AppTheme {
         Column(Modifier.padding(16.dp)) {
             AppTextField(
-                focusRequester = FocusRequester(),
+                label = "Etiket",
+                value = "Dolu Değer",
+                onValueChange = {},
+                minHeight = 40.dp
+            )
+        }
+    }
+}
+
+
+@Preview(showBackground = true, name = "TextField - İkonlu (Küçültülmüş)")
+@Composable
+private fun TextFieldWithIconsPreview() {
+    AppTheme {
+        Column(Modifier.padding(16.dp)) {
+            AppTextField(
+                label = "İkonlu Alan",
                 value = "Preview",
                 onValueChange = {},
                 trailingIcon = { Image(imageVector = AppIcons.Check, contentDescription = null) },
@@ -139,26 +144,27 @@ private fun TextFieldWithTrailingPreview() {
                         modifier = Modifier.size(20.dp),
                         imageVector = AppIcons.Info,
                         contentDescription = null,
-                        colorFilter = ColorFilter.tint(
-                            MaterialTheme.colorScheme.secondary
-                        )
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary)
                     )
                 },
+                minHeight = 48.dp
             )
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "TextField - Hatalı (Küçültülmüş)")
 @Composable
-private fun LongTextFieldPreview() {
+private fun TextFieldErrorPreview() {
     AppTheme {
         Column(Modifier.padding(16.dp)) {
             AppTextField(
-                focusRequester = FocusRequester(),
-                value = "Preview",
-                modifier = Modifier.height(320.dp),
+                label = "Hatalı Alan",
+                value = "Yanlış Değer",
                 onValueChange = {},
+                isError = true,
+                errorText = "Bu alan hatalı!",
+                minHeight = 48.dp
             )
         }
     }

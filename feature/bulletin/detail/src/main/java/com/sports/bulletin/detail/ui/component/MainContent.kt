@@ -1,36 +1,34 @@
 package com.sports.bulletin.detail.ui.component
 
-import androidx.compose.ui.draw.clip
-import com.sports.ui.extentions.toReadableDateTime
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sports.component.domain.model.Bookmaker
 import com.sports.component.domain.model.EventDetailDomainModel
-import com.sports.component.domain.model.Market
-import com.sports.component.domain.model.Outcome
 import com.sports.component.domain.model.testEventDetailDomainModel
+import com.sports.datastore.model.BasketItem
 import com.sports.designsystem.component.AppText
 import com.sports.designsystem.theme.AppTheme
-import com.sports.designsystem.theme.semibold
+import com.sports.designsystem.theme.MediumSpacer
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 
 @Composable
 fun BulletinDetailMainContent(
     eventDetail: EventDetailDomainModel?,
-    onAddBetClick: (eventId: String, marketKey: String, outcomeName: String, price: Double, point: Double?) -> Unit,
+    currentBasketItems: ImmutableList<BasketItem>,
+    onAddBetClick: (BasketItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (eventDetail == null) {
@@ -38,6 +36,9 @@ fun BulletinDetailMainContent(
             AppText("Etkinlik detayları yükleniyor veya bulunamadı...")
         }
         return
+    }
+    val selectedSelectionIds = remember(currentBasketItems) {
+        currentBasketItems.map { it.selectionId }.toSet()
     }
     Column {
         EventGeneralInfo(event = eventDetail)
@@ -70,163 +71,29 @@ fun BulletinDetailMainContent(
                         ) { market ->
                             MarketSectionCard(
                                 market = market,
+                                eventId = eventDetail.id,
+                                selectedSelectionIds = selectedSelectionIds,
                                 onOutcomeClick = { outcome ->
                                     onAddBetClick(
-                                        eventDetail.id,
-                                        market.key,
-                                        outcome.name,
-                                        outcome.price,
-                                        outcome.point
+                                        BasketItem(
+                                            selectionId = "${eventDetail.id}_${bookmaker.key}_${market.key}_${outcome.name}",
+                                            eventId = eventDetail.id,
+                                            marketKey = market.key,
+                                            outcomeName = outcome.name,
+                                            outcomePrice = outcome.price,
+                                            homeTeam = eventDetail.homeTeam,
+                                            awayTeam = eventDetail.awayTeam,
+                                            bookmakerKey = bookmaker.key ?:"",
+                                        )
                                     )
                                 },
-                                modifier = Modifier.padding(top = 8.dp)
+                                bookmakerKey = bookmaker.key ?:"",
                             )
+                            MediumSpacer()
                         }
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun EventGeneralInfo(event: EventDetailDomainModel) {
-    Column(
-        modifier = Modifier.fillMaxWidth()
-            .background(MaterialTheme.colorScheme.secondaryContainer)
-            .padding(bottom = 8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        AppText(
-            text = event.sportTitle,
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center
-        )
-        Spacer(Modifier.height(8.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            AppText(
-                text = event.homeTeam,
-                style = MaterialTheme.typography.headlineSmall.semibold,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            AppText(
-                text = "VS",
-                style = MaterialTheme.typography.bodyLarge.semibold,
-                modifier = Modifier.padding(horizontal = 8.dp)
-            )
-            AppText(
-                text = event.awayTeam,
-                style = MaterialTheme.typography.headlineSmall.semibold,
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
-        Spacer(Modifier.height(4.dp))
-        AppText(
-            text = event.startTime.toReadableDateTime(),
-            style = MaterialTheme.typography.bodySmall,
-        )
-    }
-}
-
-@Composable
-fun BookmakerHeader(bookmaker: Bookmaker) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        bookmaker.title?.let { title ->
-            AppText(
-                text = title,
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
-        }
-        bookmaker.lastUpdate?.let { update ->
-            AppText(
-                text = "Son Güncelleme: ${update.toReadableDateTime()}",
-                style = MaterialTheme.typography.labelSmall,
-            )
-        }
-    }
-}
-
-
-@Composable
-fun MarketSectionCard(
-    market: Market,
-    onOutcomeClick: (outcome: Outcome) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-        shape = MaterialTheme.shapes.medium,
-    ) {
-        Column(modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp)) {
-            AppText(
-                text = market.key.let { marketKey ->
-                    when (marketKey) {
-                        "h2h" -> "Maç Sonucu"
-                        "spreads" -> "Handikaplı Maç Sonucu"
-                        "totals" -> "Toplam Sayı (Alt/Üst)"
-                        else -> marketKey.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                    }
-                },
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 10.dp)
-            )
-
-            market.outcomes.forEach { outcome ->
-                OutcomeRow(
-                    outcome = outcome,
-                    onClick = { onOutcomeClick(outcome) }
-                )
-                if (outcome != market.outcomes.last()) {
-                    Spacer(Modifier.height(4.dp))
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun OutcomeRow(
-    outcome: Outcome,
-    onClick: () -> Unit
-) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(MaterialTheme.shapes.small)
-            .clickable(onClick = onClick),
-        shape = MaterialTheme.shapes.small,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            AppText(
-                text = outcome.name + (outcome.point?.let { p -> " (${if (p > 0) "+" else ""}$p)" } ?: ""),
-                style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.weight(1f).padding(end = 8.dp),
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            AppText(
-                text = outcome.price.toString(), // Oran
-                style = MaterialTheme.typography.titleSmall.semibold, // Oran stili
-            )
         }
     }
 }
@@ -238,7 +105,44 @@ private fun BulletinDetailMainContentSuccessPreview() {
     AppTheme {
         BulletinDetailMainContent(
             eventDetail = testEventDetailDomainModel(),
-            onAddBetClick = { _, _, _, _, _ -> },
+            currentBasketItems = persistentListOf(),
+            onAddBetClick = { },
+        )
+    }
+}
+
+@Preview(showBackground = true, name = "BulletinDetail - Item Selected")
+@Composable
+private fun BulletinDetailMainContentItemSelectedPreview() {
+    val eventDetail = testEventDetailDomainModel()
+    val sampleBasketItems = if (eventDetail.bookmakers.isNotEmpty() &&
+        eventDetail.bookmakers.first().markets.isNotEmpty() &&
+        eventDetail.bookmakers.first().markets.first().outcomes.isNotEmpty()
+    ) {
+        val bookmaker = eventDetail.bookmakers.first()
+        val market = eventDetail.bookmakers.first().markets.first()
+        val outcome = market.outcomes.first()
+        persistentListOf(
+            BasketItem(
+                selectionId = "${eventDetail.id}_${market.key}_${outcome.name}",
+                eventId = eventDetail.id,
+                marketKey = market.key,
+                homeTeam = eventDetail.homeTeam,
+                awayTeam = eventDetail.awayTeam,
+                outcomeName = outcome.name,
+                outcomePrice = outcome.price,
+                bookmakerKey = bookmaker.key ?:""
+            )
+        )
+    } else {
+        persistentListOf()
+    }
+
+    AppTheme {
+        BulletinDetailMainContent(
+            eventDetail = testEventDetailDomainModel(),
+            currentBasketItems = sampleBasketItems,
+            onAddBetClick = { },
         )
     }
 }

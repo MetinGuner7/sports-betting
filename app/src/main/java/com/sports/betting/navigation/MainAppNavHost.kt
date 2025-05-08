@@ -16,6 +16,7 @@ import com.sports.auth.login.ui.navigateToLogin
 import com.sports.auth.login.ui.navigateToLoginPopUpTo
 import com.sports.auth.register.ui.navigateToRegister
 import com.sports.auth.register.ui.register
+import com.sports.basket.ui.basket
 import com.sports.splash.ui.Splash
 import com.sports.splash.ui.splash
 
@@ -54,6 +55,9 @@ fun MainAppNavHost(
             }
         )
         bulletinDetail(
+            navigateBack = navController::navigateUp
+        )
+        basket(
             navigateBack = navController::navigateUp
         )
     }

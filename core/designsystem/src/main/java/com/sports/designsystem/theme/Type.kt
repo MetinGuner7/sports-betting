@@ -10,11 +10,11 @@ import com.sports.designsystem.R
 
 // These values are only for demonstration purposes.
 // They should be replaced with the actual values from the design system.
-private val inter =
+private val roboto =
     FontFamily(
-        Font(R.font.inter_medium, FontWeight.Medium),
-        Font(R.font.inter_regular, FontWeight.Normal),
-        Font(R.font.inter_semibold, FontWeight.SemiBold),
+        Font(R.font.roboto_regular, FontWeight.Medium),
+        Font(R.font.roboto_regular, FontWeight.Normal),
+        Font(R.font.roboto_regular, FontWeight.SemiBold),
     )
 
 
@@ -34,7 +34,7 @@ val Typography =
         // Display 2xl
         displayLarge =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 72.sp,
                 letterSpacing = (-0.02).sp,
@@ -43,7 +43,7 @@ val Typography =
         // Display xl
         displayMedium =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 60.sp,
                 letterSpacing = (-0.02).sp,
@@ -52,7 +52,7 @@ val Typography =
         // Display lg
         displaySmall =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 48.sp,
                 letterSpacing = (-0.02).sp,
@@ -61,7 +61,7 @@ val Typography =
         // Display md
         headlineLarge =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 36.sp,
                 letterSpacing = (-0.02).sp,
@@ -70,7 +70,7 @@ val Typography =
         // Display sm
         headlineMedium =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 30.sp,
                 lineHeight = 38.sp,
@@ -78,7 +78,7 @@ val Typography =
         // Display xs
         headlineSmall =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 24.sp,
                 lineHeight = 32.sp,
@@ -86,7 +86,7 @@ val Typography =
         // Text xl
         titleLarge =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 20.sp,
                 lineHeight = 30.sp,
@@ -94,7 +94,7 @@ val Typography =
         // Text lg
         titleMedium =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 18.sp,
                 lineHeight = 28.sp,
@@ -102,15 +102,15 @@ val Typography =
         // Text md
         bodyLarge =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
-                lineHeight = 24.sp,
+                lineHeight = 20.sp,
             ),
         // Text sm
         bodyMedium =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -118,7 +118,7 @@ val Typography =
         // Text xs
         bodySmall =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 12.sp,
                 lineHeight = 18.sp,
@@ -126,21 +126,21 @@ val Typography =
         // Rest of them undefined in design system but keep them for future use
         labelLarge =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Normal,
                 fontSize = 12.sp,
                 lineHeight = 16.sp,
             ),
         labelMedium =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
             ),
         labelSmall =
             TextStyle(
-                fontFamily = inter,
+                fontFamily = roboto,
                 fontWeight = FontWeight.Medium,
                 fontSize = 10.sp,
                 lineHeight = 16.sp,

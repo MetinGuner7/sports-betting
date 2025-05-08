@@ -60,7 +60,9 @@ fun SearchInput(
             if (value.isNotEmpty()) {
                 Image(
                     modifier =
-                        Modifier.clickableWithoutRipple (
+                        Modifier
+                            .size(20.dp)
+                            .clickableWithoutRipple (
                             onClick = {
                                 onClearClick()
                                 scope.launch {

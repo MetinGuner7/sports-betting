@@ -3,8 +3,7 @@ package com.sports.bulletin.detail.ui
 import androidx.compose.runtime.Stable
 import com.sports.common.base.IViewState
 import com.sports.component.domain.model.EventDetailDomainModel
-import com.sports.component.domain.model.Market
-import com.sports.component.domain.model.SportDomainModel
+import com.sports.datastore.model.BasketItem
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -17,4 +16,5 @@ data class BulletinDetailViewState(
     val error: String? = null,
     val searchQuery: String = "",
     val key: String = "",
-) : IViewState
+    val basketItems: ImmutableList<BasketItem> = persistentListOf(),
+    ) : IViewState

@@ -38,6 +38,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.monitor)
     implementation(projects.core.network)
+    implementation(projects.core.datastore)
 
     implementation(projects.feature.splash)
     implementation(projects.feature.auth.login)
@@ -45,6 +46,7 @@ dependencies {
     implementation(projects.feature.bulletin.list)
     implementation(projects.feature.bulletin.detail)
     implementation(projects.feature.bulletin.component)
+    implementation(projects.feature.bulletin.basket)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

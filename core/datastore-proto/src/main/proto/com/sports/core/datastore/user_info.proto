@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.loodos.hrapp.vodafone.core.datastore";
+option java_package = "com.sports.core.datastore";
 option java_multiple_files = true;
 
 message UserInfo {

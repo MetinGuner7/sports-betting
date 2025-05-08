@@ -1,8 +1,8 @@
 package com.sports.datastore
 
 import androidx.datastore.core.DataStore
-import com.loodos.hrapp.vodafone.core.datastore.UserInfo
-import com.loodos.hrapp.vodafone.core.datastore.copy
+import com.sports.core.datastore.UserInfo
+import com.sports.core.datastore.copy
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 

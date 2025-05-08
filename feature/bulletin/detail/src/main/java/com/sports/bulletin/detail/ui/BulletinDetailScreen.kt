@@ -7,19 +7,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.sports.bulletin.detail.R
 import com.sports.bulletin.detail.ui.component.BulletinDetailMainContent
 import com.sports.component.domain.model.testEventDetailDomainModel
 import com.sports.designsystem.component.AppText
@@ -44,7 +44,6 @@ fun BulletinDetailRoute(
             }
         }
     }
-
     BulletinDetailScreen(uiState = uiState, onViewEvent = viewModel::onHandleViewEvent)
 }
 
@@ -60,11 +59,11 @@ fun BulletinDetailScreen(
     Scaffold(
         topBar = {
             AppCenterTopAppBar(
-                title = "BulletinDetail",
+                title = stringResource(R.string.stakes),
                 onNavigationClick = {onViewEvent(BulletinDetailEvent.NavigateBack)},
                 navigationIcon = AppIcons.LeftArrowIcon
             )
-        }
+        },
     ) { padding ->
         Box(
             modifier = Modifier
@@ -73,30 +72,30 @@ fun BulletinDetailScreen(
         ) {
             when {
                 uiState.loading -> {
-                    // Yükleniyor Durumu
                     AppLoading(isDisplayed = true, modifier = Modifier.align(Alignment.Center))
                 }
                 uiState.error != null -> {
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(16.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        AppText(text = "Detaylar yüklenirken hata oluştu.")
+                        AppText(text = stringResource(R.string.eror_detail_loaded))
                         Spacer(modifier = Modifier.height(8.dp))
                         AppText(text = uiState.error, style = MaterialTheme.typography.bodySmall)
                         Spacer(modifier = Modifier.height(16.dp))
-                        Button(onClick = {}) {
-                            Text("Tekrar Dene")
-                        }
                     }
                 }
-
                 else -> {
                     Column {
                         BulletinDetailMainContent(
                             eventDetail = uiState.eventDetail,
-                            onAddBetClick = { _, _, _, _, _ -> },
+                            onAddBetClick = { item ->
+                                onViewEvent(BulletinDetailEvent.AddBetToBasket(item))
+                            },
+                            currentBasketItems = uiState.basketItems
                         )
                     }
                 }

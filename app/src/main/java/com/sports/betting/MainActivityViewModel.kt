@@ -1,19 +1,25 @@
 package com.sports.betting
 
 import androidx.compose.runtime.Stable
+import androidx.lifecycle.viewModelScope
 import com.sports.common.base.BaseViewModel
 import com.sports.common.base.IViewState
 import com.sports.common.model.DialogType
 import com.sports.common.model.FriendlyMessageDTO
+import com.sports.datastore.usecase.GetBasketItemsUseCase
 import com.sports.monitor.AppEventType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel
 @Inject
 constructor(
-
+    private val getBasketItemsUseCase: GetBasketItemsUseCase,
 ) : BaseViewModel<MainActivityViewState>() {
     override fun createInitialState(): MainActivityViewState = MainActivityViewState()
 
@@ -32,7 +38,31 @@ constructor(
             MainActivityViewEvent.OnDismissErrorDialog -> onDismissErrorDialog()
         }
     }
+    init {
+        observeBasketItems()
+    }
 
+
+    private fun observeBasketItems() {
+    viewModelScope.launch {
+        getBasketItemsUseCase(Unit)
+            .onEach { basketItems ->
+                    val calculatedTotalOdds = if (basketItems.isEmpty()) {
+                        0.0
+                    } else {
+                        basketItems.map { it.outcomePrice }.reduce { acc, price -> acc * price }
+                    }
+                    setState {
+                        copy(
+                            totalOdds = calculatedTotalOdds,
+                        )
+                    }
+            }
+            .catch { throwable ->
+            }
+            .launchIn(viewModelScope)
+    }
+}
     /**
      * Handles the display of error dialogs based on the provided `AppEventType`.
      *
@@ -91,4 +121,5 @@ data class MainActivityViewState(
     val showToastMessage: Boolean = false,
     val dialogType: DialogType? = null,
     val token: String? = null,
+    val totalOdds: Double = 0.0
 ) : IViewState

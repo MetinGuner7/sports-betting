@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stake">Oran: %1$s</string>
+    <string name="choice">Seçim: %1$s</string>
+    <string name="versus">vs</string>
+</resources>
