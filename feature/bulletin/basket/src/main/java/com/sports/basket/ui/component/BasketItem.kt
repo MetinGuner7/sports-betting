@@ -44,57 +44,75 @@ fun BasketItemContent(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         shape = MaterialTheme.shapes.medium
     ) {
-        Row (modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 12.dp),
-        ){
-            Column(modifier = Modifier.weight(.9f)) {
-                Column (
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ){
-                    AppText(
-                        text = item.homeTeam,
-                        style = MaterialTheme.typography.bodyMedium.semibold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text(
-                        text = stringResource(R.string.versus),
-                        style = MaterialTheme.typography.labelSmall.regular)
-                    AppText(
-                        text = item.awayTeam,
-                        style = MaterialTheme.typography.bodyMedium.semibold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    MediumSpacer()
+        Column {
+            Row (modifier = Modifier
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            ){
+                Column(modifier = Modifier.weight(.9f)) {
+                    Column (
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ){
+                        AppText(
+                            text = item.homeTeam,
+                            style = MaterialTheme.typography.bodyMedium.semibold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = stringResource(R.string.versus),
+                            style = MaterialTheme.typography.labelSmall.regular)
+                        AppText(
+                            text = item.awayTeam,
+                            style = MaterialTheme.typography.bodyMedium.semibold,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row (
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ){
+                Column(modifier = Modifier.fillMaxHeight(),
+                    verticalArrangement = Arrangement.Center){
+                    IconButton(onClick = onRemoveClick) {
+                        Icon(
+                            imageVector = AppIcons.Cancel,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
+                }
+            }
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ){
+                Row {
                     AppText(
                         text = stringResource(R.string.choice, item.outcomeName),
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                                color = MaterialTheme.colorScheme.outlineVariant
+                            ),
                     )
                     AppText(
-                        text = stringResource(R.string.stake, "%.2f".format(item.outcomePrice)),
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-
-                }
-            }
-            Column(modifier = Modifier.fillMaxHeight(),
-                verticalArrangement = Arrangement.Center){
-                IconButton(onClick = onRemoveClick) {
-                    Icon(
-                        imageVector = AppIcons.Cancel,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.error
+                        text = " ${item.outcomeName}" ,
+                        style = MaterialTheme.typography.bodyMedium.semibold,
                     )
                 }
+                Row {
+                    AppText(
+                        text = stringResource(R.string.stake),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = MaterialTheme.colorScheme.outlineVariant
+                        ),
+                    )
+                    AppText(
+                        text = " %.2f".format(item.outcomePrice),
+                        style = MaterialTheme.typography.bodyMedium.semibold,
+                    )
+                }
             }
+            MediumSpacer()
         }
     }
 }
